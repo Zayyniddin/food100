@@ -195,8 +195,6 @@ function addToReceipt(burger) {
     `;
 }
 
-
-
 function getSelectedBurgers() {
     const selectedBurgers = [];
     for (const burgerId in food) {

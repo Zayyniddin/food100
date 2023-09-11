@@ -329,13 +329,13 @@ a {
     left: 50%;
     transform: translateX(-50%);
     position: absolute;
+    padding: 5px;
 }
 
 .receipt__window-out {
     flex-grow: 1;
     align-self: stretch;
-    padding: 15px;
-    /* white-space: pre-wrap; */
+    padding: 5px;
 }
 
 .receipt__window-btn {
@@ -346,7 +346,7 @@ a {
     font-size: 17px;
     border: none;
     border-radius: 6px;
-    margin: 10px 0;
+    margin: 4px 0 10px;
     cursor: pointer;
 }
 
@@ -372,7 +372,6 @@ a {
     display: flex;
     justify-content: space-evenly;
     width: 100%;
-    margin-bottom: 20px;
 }
 
 .receipt__window-out-info-extra-text {
@@ -383,6 +382,7 @@ a {
 .receipt__window-out-info {
     padding: 4px;
     background: lightgray;
+    border-radius: 7px;
 }
 .receipt__window-out-name {
     margin-top: 10px;
@@ -435,4 +435,5 @@ a {
         font-size: 12px;
         font-weight: bold;
     }
+  
 }
