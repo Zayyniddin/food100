@@ -8,9 +8,9 @@ const food = {
         calories: 0,
         selectedExtras: [],
         extras: {
-            doubleMayonnaise: { name: 'Двойной майонез', calories: 100 },
-            lettuce: { name: 'Салатный лист', calories: 20 },
-            cheese: { name: 'Сыр', calories: 150 }
+            doubleMayonnaise: { name: 'Двойной майонез', calories: 100, extraPrice: 8000 },
+            lettuce: { name: 'Салатный лист', calories: 20, extraPrice: 5000 },
+            cheese: { name: 'Сыр', calories: 150, extraPrice: 6000 }
         },
         get totalPrice() {
             return this.amount * this.price;
@@ -32,9 +32,9 @@ const food = {
         calories: 0,
         selectedExtras: [],
         extras: {
-            doubleMayonnaise: { name: 'Двойной майонез', calories: 100 },
-            lettuce: { name: 'Салатный лист', calories: 20 },
-            cheese: { name: 'Сыр', calories: 150 }
+            doubleMayonnaise: { name: 'Двойной майонез', calories: 100, extraPrice: 8000 },
+            lettuce: { name: 'Салатный лист', calories: 20, extraPrice: 5000 },
+            cheese: { name: 'Сыр', calories: 150, extraPrice: 6000 }
         },
         get totalPrice() {
             return this.amount * this.price;
@@ -56,9 +56,9 @@ const food = {
         calories: 0,
         selectedExtras: [],
         extras: {
-            doubleMayonnaise: { name: 'Двойной майонез', calories: 100 },
-            lettuce: { name: 'Салатный лист', calories: 20 },
-            cheese: { name: 'Сыр', calories: 150 }
+            doubleMayonnaise: { name: 'Двойной майонез', calories: 100, extraPrice: 8000 },
+            lettuce: { name: 'Салатный лист', calories: 20, extraPrice: 5000 },
+            cheese: { name: 'Сыр', calories: 150, extraPrice: 6000 }
         },
         get totalPrice() {
             return this.amount * this.price;
@@ -84,19 +84,24 @@ function updateDisplay(burgerId) {
     burgerCall.textContent = burger.totalCalories.toLocaleString() + ' калорий'
 }
 
-function selectedExtrasList(burgerId) {
-    const burger = food[burgerId];
-    const selectedExtrasList = burger.selectedExtras.map(extra => burger.extras[extra].name)
-    console.log(selectedExtrasList);
-
-}
-
 function updateCall(burger) {
     burger.calories = burger.baseCalories
     for (const extra of burger.selectedExtras) {
         burger.calories += burger.extras[extra].calories
     }
 }
+
+
+function updateCallPrice(burger) {
+    let burgerPrice = burger.price;
+    for (const extra of burger.selectedExtras) {
+        burgerPrice += burger.extras[extra].extraPrice;
+    }
+    burger.totalPrice = burgerPrice * burger.amount;
+    console.log(burger.totalPrice); 
+}
+
+
 
 const plusBtn = document.querySelectorAll('.plus')
 const minusBtn = document.querySelectorAll('.minus')
@@ -168,6 +173,16 @@ orderBtn.addEventListener('click', () => {
     location.reload()
 })
 
+function getSelectedBurgers() {
+    const selectedBurgers = [];
+    for (const burgerId in food) {
+        const burger = food[burgerId];
+        if (burger.amount > 0) {
+            selectedBurgers.push(burger);
+        }
+    }
+    return selectedBurgers;
+}
 
 function addToReceipt(burger) {
     const { name, price, amount, totalCalories, selectedExtras } = burger;
@@ -195,15 +210,5 @@ function addToReceipt(burger) {
     `;
 }
 
-function getSelectedBurgers() {
-    const selectedBurgers = [];
-    for (const burgerId in food) {
-        const burger = food[burgerId];
-        if (burger.amount > 0) {
-            selectedBurgers.push(burger);
-        }
-    }
-    return selectedBurgers;
-}
 
 
